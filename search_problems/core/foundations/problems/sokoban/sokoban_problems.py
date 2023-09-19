@@ -14,11 +14,6 @@ def generate_possible_goals(goal):
     row_index += 1
   return goals
 
-goal = [
-      [" ", " ", " "],
-      [" ", " ", "B"],
-      [" ", " ", " "]
-    ]
 
 sokoban_problems = {
   "easy_1": {
@@ -26,11 +21,17 @@ sokoban_problems = {
     "initial": [
       ["A", " ", " "],
       [" ", "B", "G"],
+      [" ", "B", " "],
+      [" ", "G", " "],
+      [" ", " ", " "],
       [" ", " ", " "]
     ],
     "goals": generate_possible_goals([
       [" ", " ", " "],
       [" ", " ", "B"],
+      [" ", " ", " "],
+      [" ", "B", " "],
+      [" ", " ", " "],
       [" ", " ", " "]
     ])
   }

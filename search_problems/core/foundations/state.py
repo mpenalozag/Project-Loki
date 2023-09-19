@@ -165,11 +165,11 @@ class SokobanState(State):
 
     # Change in position with box nearby.
     if not (self.agent_coords[0] - 2 < 0) and self.display[self.agent_coords[0]-1][self.agent_coords[1]] == "B" and self.display[self.agent_coords[0]-2][self.agent_coords[1]] != "B":
-      valid_movements.append( [[self.agent_coords[0]-2, self.agent_coords[1]], " PUSH UP"] )
+      valid_movements.append( [[self.agent_coords[0]-1, self.agent_coords[1]], " PUSH UP"] )
     if not (self.agent_coords[1] - 2 < 0) and self.display[self.agent_coords[0]][self.agent_coords[1]-1] == "B" and self.display[self.agent_coords[0]][self.agent_coords[1]-2] != "B":
       valid_movements.append( [[self.agent_coords[0], self.agent_coords[1]-1], "PUSH LEFT"] )
     if not (self.agent_coords[0] + 2 >= len(self.display)) and self.display[self.agent_coords[0]+1][self.agent_coords[1]] == "B" and self.display[self.agent_coords[0]+2][self.agent_coords[1]] != "B":
-      valid_movements.append( [[self.agent_coords[0]+2, self.agent_coords[1]], "PUSH DOWN"] )
+      valid_movements.append( [[self.agent_coords[0]+1, self.agent_coords[1]], "PUSH DOWN"] )
     if not (self.agent_coords[1] + 2 >= len(self.display[0])) and self.display[self.agent_coords[0]][self.agent_coords[1]+1] == "B" and self.display[self.agent_coords[0]][self.agent_coords[1]+2] != "B":
       valid_movements.append( [[self.agent_coords[0], self.agent_coords[1]+1], "PUSH RIGHT"] )
   
