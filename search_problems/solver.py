@@ -40,6 +40,8 @@ class Solver:
 def create_solver(problem_type, name, algorithm, heuristic):
   created_problem = problem_factory(problem_type, name)
   algorithm = algorithm_factory(algorithm)
-  chosen_heuristic = heuristic_factory(problem_type, heuristic, created_problem.goal_state.display if problem_type != "sokoban" else created_problem.goal_state)
+  chosen_heuristic = None
+  if heuristic is not None:
+    chosen_heuristic = heuristic_factory(problem_type, heuristic, created_problem.goal_state.display)
   solver = Solver(created_problem, algorithm, chosen_heuristic)
   return solver

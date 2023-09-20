@@ -13,8 +13,9 @@ def heuristic_factory(problem, name, goal):
       "euclidian_distance": vacuum_heuristic_factory("euclidian_distance")
     },
     "sokoban": {
-      "boxes_out_of_goal": sokoban_heuristic_factory("boxes_out_of_goal"),
-      "euclidian_distance": sokoban_heuristic_factory("euclidian_distance")
+      "boxes_out_of_goal": sokoban_heuristic_factory("boxes_out_of_goal", goal),
+      "euclidian_distance": sokoban_heuristic_factory("euclidian_distance", goal),
+      "manhattan_distance": sokoban_heuristic_factory("manhattan_distance", goal),
     }
   }
   return heuristics[problem][name]

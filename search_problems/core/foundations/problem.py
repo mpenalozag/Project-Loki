@@ -1,3 +1,4 @@
+import copy
 from .state import *
 from .problems.sliding_puzzle.sliding_problems import *
 from .problems.vacuum_world.vacuum_problems import *
@@ -15,7 +16,17 @@ class Problem:
 
   def is_solution(self, state):
     if self.name == 'sokoban':
-      return state.display in self.goal_state.display
+      display_copy = copy.deepcopy(state.display)
+      row_index = 0
+      for row in display_copy:
+        column_index = 0
+        for cell in row:
+          if cell == "A":
+            display_copy[row_index][column_index] = " "
+            break;
+          column_index += 1
+        row_index += 1
+      return display_copy == self.goal_state.display
     return state.display == self.goal_state.display
 
 class SlidingProblem(Problem):
@@ -46,7 +57,7 @@ class SokobanProblem(Problem):
   def instantiate_problem(self, chosen_problem):
     self.name = "sokoban"
     self.initial_state = SokobanState(self.problem["initial"], self.problem["init_agent_coords"])
-    self.goal_state = SokobanState(self.problem["goals"], None)
+    self.goal_state = SokobanState(self.problem["goal"], None)
 
 def problem_factory(name, chosen):
   problems = {
