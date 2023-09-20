@@ -8,7 +8,9 @@ class State:
 
   def print_self(self):
     for row in self.display:
-      print(row)
+      for element in row:
+        print(element, end=" ")
+      print()
 
   def get_possible_states(self):
     """
