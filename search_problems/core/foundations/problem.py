@@ -15,18 +15,6 @@ class Problem:
     pass
 
   def is_solution(self, state):
-    if self.name == 'sokoban':
-      display_copy = copy.deepcopy(state.display)
-      row_index = 0
-      for row in display_copy:
-        column_index = 0
-        for cell in row:
-          if cell == "A":
-            display_copy[row_index][column_index] = " "
-            break;
-          column_index += 1
-        row_index += 1
-      return display_copy == self.goal_state.display
     return state.display == self.goal_state.display
 
 class SlidingProblem(Problem):
@@ -58,6 +46,19 @@ class SokobanProblem(Problem):
     self.name = "sokoban"
     self.initial_state = SokobanState(self.problem["initial"], self.problem["init_agent_coords"])
     self.goal_state = SokobanState(self.problem["goal"], None)
+
+  def is_solution(self, state):
+    display_copy = copy.deepcopy(state.display)
+    row_index = 0
+    for row in display_copy:
+      column_index = 0
+      for cell in row:
+        if cell == "A":
+          display_copy[row_index][column_index] = " "
+          break;
+        column_index += 1
+      row_index += 1
+    return display_copy == self.goal_state.display
 
 def problem_factory(name, chosen):
   problems = {

@@ -116,35 +116,18 @@ class SokobanState(State):
     valid_movements = self.get_valid_movements()
     for movement in valid_movements:
       new_display = copy.deepcopy(self.display)
-      if movement[1] in "UP/LEFT/DOWN/RIGHT":
-        new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
-        new_display[movement[0][0]][movement[0][1]] = "A"
-        new_state = SokobanState(new_display, movement[0])
-        possible_states.append(new_state)
-      elif movement[1] == "PUSH UP":
-        new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
-        new_display[movement[0][0]][movement[0][1]] = "A"
+      new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
+      new_display[movement[0][0]][movement[0][1]] = "A"
+      if movement[1] == "PUSH UP":
         new_display[movement[0][0]-1][movement[0][1]] = "B"
-        new_state = SokobanState(new_display, movement[0])
-        possible_states.append(new_state)
       elif movement[1] == "PUSH LEFT":
-        new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
-        new_display[movement[0][0]][movement[0][1]] = "A"
         new_display[movement[0][0]][movement[0][1]-1] = "B"
-        new_state = SokobanState(new_display, movement[0])
-        possible_states.append(new_state)
       elif movement[1] == "PUSH DOWN":
-        new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
-        new_display[movement[0][0]][movement[0][1]] = "A"
         new_display[movement[0][0]+1][movement[0][1]] = "B"
-        new_state = SokobanState(new_display, movement[0])
-        possible_states.append(new_state)
       elif movement[1] == "PUSH RIGHT":
-        new_display[self.agent_coords[0]][self.agent_coords[1]] = " "
-        new_display[movement[0][0]][movement[0][1]] = "A"
         new_display[movement[0][0]][movement[0][1]+1] = "B"
-        new_state = SokobanState(new_display, movement[0])
-        possible_states.append(new_state)
+      new_state = SokobanState(new_display, movement[0])
+      possible_states.append(new_state)
       new_state.previous_move = movement[1]
     return possible_states
 

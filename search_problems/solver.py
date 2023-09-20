@@ -32,8 +32,6 @@ class Solver:
     print(f"Solution Found in {len(solution_path)} steps.")
     print(f"Time: {round(self.end_time - self.start_time, 4)} seconds")
     print(solution_path)
-    solution_node.state.print_self()
-    print()
     print()
     return solution_node
 

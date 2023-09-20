@@ -79,8 +79,43 @@ class EuclidianDistanceToGoal():
   def __str__(self):
     return "Euclidian Distance to Goal"
 
+  def get_euclidian_distance(self, coord1, coord2):
+    return ((coord1[0] - coord2[0])**2 + (coord1[1] - coord2[1])**2)**0.5
+
+  def get_goal_coords(self):
+    goals = []
+    row_index = 0
+    for row in self.goal:
+      column_index = 0
+      for element in row:
+        if element == "B":
+          goals.append((row_index, column_index))
+        column_index += 1
+      row_index += 1
+    return goals
+
+  def get_closest_goal(self, original_box_position):
+    goals_coords = self.get_goal_coords()
+    closest_goal = goals_coords[0]
+    closest_distance = self.get_euclidian_distance(original_box_position, closest_goal)
+    for coord in goals_coords:
+      distance = self.get_euclidian_distance(original_box_position, coord)
+      if distance < closest_distance:
+        closest_distance = distance
+        closest_goal = coord
+    return closest_distance
+
   def __call__(self, state):
-    pass
+    total_distance = 0
+    row_index = 0
+    for row in state.display:
+      column_index = 0
+      for element in row:
+        if element == "B":
+          total_distance += self.get_closest_goal((row_index, column_index))
+        column_index += 1
+      row_index += 1
+    return total_distance
 
 def sokoban_heuristic_factory(name, goal):
   heuristics = {
